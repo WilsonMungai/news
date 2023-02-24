@@ -14,6 +14,7 @@
 		C81CD59729A91BB800BF1572 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C81CD59529A91BB800BF1572 /* LaunchScreen.storyboard */; };
 		C81CD5A029A91E0D00BF1572 /* TopNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */; };
 		C81CD5A229A91E3700BF1572 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5A129A91E3700BF1572 /* SearchViewController.swift */; };
+		C81CD5A529A92BDB00BF1572 /* TopNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5A429A92BDB00BF1572 /* TopNewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C81CD59829A91BB800BF1572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsViewController.swift; sourceTree = "<group>"; };
 		C81CD5A129A91E3700BF1572 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C81CD5A429A92BDB00BF1572 /* TopNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		C81CD58929A91BB600BF1572 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				C81CD5A329A92BAA00BF1572 /* Views */,
 				C81CD59E29A91DF200BF1572 /* Controllers */,
 				C81CD58A29A91BB600BF1572 /* AppDelegate.swift */,
 				C81CD58C29A91BB600BF1572 /* SceneDelegate.swift */,
@@ -76,6 +79,14 @@
 				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C81CD5A329A92BAA00BF1572 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C81CD5A429A92BDB00BF1572 /* TopNewsTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +161,7 @@
 			files = (
 				C81CD5A229A91E3700BF1572 /* SearchViewController.swift in Sources */,
 				C81CD58F29A91BB600BF1572 /* NewsTabController.swift in Sources */,
+				C81CD5A529A92BDB00BF1572 /* TopNewsTableViewCell.swift in Sources */,
 				C81CD58B29A91BB600BF1572 /* AppDelegate.swift in Sources */,
 				C81CD58D29A91BB600BF1572 /* SceneDelegate.swift in Sources */,
 				C81CD5A029A91E0D00BF1572 /* TopNewsViewController.swift in Sources */,

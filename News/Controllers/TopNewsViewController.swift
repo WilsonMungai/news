@@ -11,7 +11,7 @@ class TopNewsViewController: UIViewController {
     
     private let topNewsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(TopNewsTableViewCell.self, forCellReuseIdentifier: TopNewsTableViewCell.identifier)
         return table
     }()
     
@@ -40,7 +40,7 @@ extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // delegate function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
         cell.backgroundColor = .systemBackground
         return cell
     }
