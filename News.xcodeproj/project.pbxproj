@@ -75,7 +75,6 @@
 				C81CD59E29A91DF200BF1572 /* Controllers */,
 				C81CD58A29A91BB600BF1572 /* AppDelegate.swift */,
 				C81CD58C29A91BB600BF1572 /* SceneDelegate.swift */,
-				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
 				C81CD59329A91BB800BF1572 /* Assets.xcassets */,
 				C81CD59529A91BB800BF1572 /* LaunchScreen.storyboard */,
 				C81CD59829A91BB800BF1572 /* Info.plist */,
@@ -86,6 +85,7 @@
 		C81CD59E29A91DF200BF1572 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
 				C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */,
 				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
 			);

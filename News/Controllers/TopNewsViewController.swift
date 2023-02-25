@@ -9,6 +9,8 @@ import UIKit
 
 class TopNewsViewController: UIViewController {
     
+    private var articles: [Article] = [Article]()
+    
     private let topNewsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(TopNewsTableViewCell.self, forCellReuseIdentifier: TopNewsTableViewCell.identifier)
@@ -44,10 +46,13 @@ class TopNewsViewController: UIViewController {
     }
     
     private func fetchData() {
-        APICaller.shared.getTopCanadianNews { result in
+        APICaller.shared.getTopCanadianNews { [weak self] result in
             switch result {
             case .success(let articles):
-                print(articles)
+                self?.articles = articles
+                DispatchQueue.main.async {
+                    self?.topNewsTable.reloadData()
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -59,16 +64,21 @@ class TopNewsViewController: UIViewController {
 extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     // data source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return articles.count
     }
     // delegate function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
-        cell.backgroundColor = .systemBackground
+        guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
+        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
+        let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
+        cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
+                                                           description: descriptionNews,
+                                                           imageUrl: imageNews))
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return 250
     }
 }

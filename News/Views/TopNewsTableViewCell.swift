@@ -14,9 +14,9 @@ class TopNewsTableViewCell: UITableViewCell {
     
     private let newsImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "cool")
+//        image.image = UIImage(named: "cool")
         image.clipsToBounds = true
         return image
     }()
@@ -24,7 +24,8 @@ class TopNewsTableViewCell: UITableViewCell {
     private let newsTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Headlines"
+        label.numberOfLines = 0
+//        label.text = "Headlines"
         label.textAlignment = .left
         return label
     }()
@@ -33,7 +34,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
+//        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
         label.textAlignment = .left
         return label
     }()
@@ -64,6 +65,7 @@ class TopNewsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             newsTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -150),
             
             newsDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 10),
@@ -72,7 +74,8 @@ class TopNewsTableViewCell: UITableViewCell {
             newsImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             newsImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10),
             newsImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            newsImage.leadingAnchor.constraint(equalTo: newsDescription.trailingAnchor, constant: 20)
+            newsImage.leadingAnchor.constraint(equalTo: newsDescription.trailingAnchor, constant: 20),
+            newsImage.leadingAnchor.constraint(equalTo: newsTitle.trailingAnchor, constant: 20)
         ])
     }
     
@@ -83,7 +86,13 @@ class TopNewsTableViewCell: UITableViewCell {
         if let data = viewModel.imageData {
             newsImage.image = UIImage(data: data)
         } else if let url = viewModel.imageUrl {
-            
+            URLSession.shared.dataTask(with: url) { [weak self] data, _ , error in
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async {
+                    self?.newsImage.image = UIImage(data: data)
+                }
+            }.resume()
         }
     }
     
