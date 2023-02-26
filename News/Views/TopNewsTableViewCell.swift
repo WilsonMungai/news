@@ -17,7 +17,7 @@ class TopNewsTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 15
-//        image.image = UIImage(named: "cool")
+        image.image = UIImage(named: "cool")
         image.clipsToBounds = true
         return image
     }()
@@ -26,7 +26,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-//        label.text = "Headlines"
+        label.text = "Headlines"
         label.textAlignment = .left
         return label
     }()
@@ -35,7 +35,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-//        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
+        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
         label.textAlignment = .left
         return label
     }()
