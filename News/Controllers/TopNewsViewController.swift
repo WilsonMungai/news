@@ -64,7 +64,9 @@ class TopNewsViewController: UIViewController {
 extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     // data source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        let count =  articles.count
+        print("number of articles is \(count)")
+        return count
     }
     // delegate function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,5 +82,9 @@ extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 250
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

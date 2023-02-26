@@ -28,7 +28,7 @@ struct Article: Codable {
 
 // MARK: - Source
 struct Source: Codable {
-//    let id: ID?
+    let id: String?
     let name: String
 }
 

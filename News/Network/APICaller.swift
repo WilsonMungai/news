@@ -8,6 +8,7 @@
 import Foundation
 
 //https://newsapi.org/v2/top-headlines?country=ca&category=business&apiKey=2fa5011c5fad471290a59f5494197861
+//https://newsapi.org/v2/everything?q=apple&from=2023-02-25&to=2023-02-25&sortBy=popularity&apiKey=2fa5011c5fad471290a59f5494197861
 
 // constants
 struct Constants {
@@ -20,7 +21,7 @@ class APICaller {
     
     func getTopCanadianNews(completion: @escaping (Result<[Article], Error>) -> Void) {
         // url string
-        guard let url = URL(string: "\(Constants.baseUrl)/v2/top-headlines?country=ch&category=business&apiKey=\(Constants.APIKey)") else {return}
+        guard let url = URL(string: "\(Constants.baseUrl)/v2/everything?q=apple&from=2023-02-25&to=2023-02-25&sortBy=popularity&apiKey=\(Constants.APIKey)") else {return}
         //url session
         let task = URLSession.shared.dataTask(with: url) { data, _ , error in
             guard let data = data, error == nil else { return }

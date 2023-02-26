@@ -19,6 +19,7 @@
 		C81CD5AB29AA72B900BF1572 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5AA29AA72B900BF1572 /* APICaller.swift */; };
 		C81CD5AD29AA751700BF1572 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5AC29AA751700BF1572 /* AppError.swift */; };
 		C81CD5B029AAAF9800BF1572 /* TopNewsViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5AF29AAAF9800BF1572 /* TopNewsViewCellViewModel.swift */; };
+		C81CD5B229AC046F00BF1572 /* TrendingApplesNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C81CD5AA29AA72B900BF1572 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		C81CD5AC29AA751700BF1572 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		C81CD5AF29AAAF9800BF1572 /* TopNewsViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsViewCellViewModel.swift; sourceTree = "<group>"; };
+		C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingApplesNewsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
 				C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */,
 				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
+				C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C81CD5B029AAAF9800BF1572 /* TopNewsViewCellViewModel.swift in Sources */,
+				C81CD5B229AC046F00BF1572 /* TrendingApplesNewsViewController.swift in Sources */,
 				C81CD5A829AA727800BF1572 /* Articles.swift in Sources */,
 				C81CD5A229A91E3700BF1572 /* SearchViewController.swift in Sources */,
 				C81CD5AD29AA751700BF1572 /* AppError.swift in Sources */,

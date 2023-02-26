@@ -16,6 +16,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.layer.cornerRadius = 15
 //        image.image = UIImage(named: "cool")
         image.clipsToBounds = true
         return image
@@ -42,7 +43,7 @@ class TopNewsTableViewCell: UITableViewCell {
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(newsImage)
         contentView.addSubview(newsTitle)
         contentView.addSubview(newsDescription)
@@ -65,15 +66,15 @@ class TopNewsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             newsTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -150),
+            newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -170),
             
             newsDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 10),
-            newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -150),
+            newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -170),
             
             newsImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            newsImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10),
-            newsImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            newsImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            newsImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             newsImage.leadingAnchor.constraint(equalTo: newsDescription.trailingAnchor, constant: 20),
             newsImage.leadingAnchor.constraint(equalTo: newsTitle.trailingAnchor, constant: 20)
         ])
