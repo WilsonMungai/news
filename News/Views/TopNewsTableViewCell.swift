@@ -17,7 +17,7 @@ class TopNewsTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 15
-        image.image = UIImage(named: "cool")
+//        image.image = UIImage(named: "cool")
         image.clipsToBounds = true
         return image
     }()
@@ -26,7 +26,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "Headlines"
+//        label.text = "Headlines"
         label.textAlignment = .left
         return label
     }()
@@ -35,7 +35,7 @@ class TopNewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
+//        label.text = "This is the best news Application that brings you all the latest news. This is the best news Application that brings you all the latest news"
         label.textAlignment = .left
         return label
     }()
@@ -60,6 +60,13 @@ class TopNewsTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        newsImage.image = nil
+        newsTitle.text = nil
+        newsDescription.text = nil
+    }
+    
     
     // MARK: - Private functions
     private func addConstraint() {
@@ -82,17 +89,21 @@ class TopNewsTableViewCell: UITableViewCell {
     
     func configure(viewModel: TopNewsViewCellViewModel) {
         newsTitle.text = viewModel.title
-        newsDescription.text = viewModel.description
-        
+//        newsDescription.text = viewModel.description
+        newsDescription.text = viewModel.source
+        // make usre that we have data
         if let data = viewModel.imageData {
+            // if there are images stored in cache, fetch the images from cache instead of downloading again
             newsImage.image = UIImage(data: data)
+            // otherwise if ther is no image data, download from the url
         } else if let url = viewModel.imageUrl {
             URLSession.shared.dataTask(with: url) { [weak self] data, _ , error in
                 guard let data = data, error == nil else { return }
-                
+//                self?.newsImage.image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self?.newsImage.image = UIImage(data: data)
                 }
+                // resume task from suspended state
             }.resume()
         }
     }

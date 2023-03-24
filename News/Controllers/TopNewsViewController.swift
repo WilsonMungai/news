@@ -9,6 +9,7 @@ import UIKit
 
 class TopNewsViewController: UIViewController {
     
+    // object of article model
     private var articles: [Article] = [Article]()
     
     private let topNewsTable: UITableView = {
@@ -46,7 +47,12 @@ class TopNewsViewController: UIViewController {
     }
     
     private func fetchData() {
-        APICaller.shared.getTopCanadianNews { [weak self] result in
+//        var date = DateFormatter()
+//        date.dateFormat = "yyyy-MM-dd"
+//        let date = Date().formatted(.iso8601)
+        let date = Date().dayBefore.formatted(.dateTime
+            .year().day().month(.twoDigits))
+        APICaller.shared.getTopCanadianNews(with: date) { [weak self] result in
             switch result {
             case .success(let articles):
                 self?.articles = articles
@@ -57,6 +63,18 @@ class TopNewsViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+        
+//        APICaller.shared.getTopCanadianNews { [weak self] result in
+//            switch result {
+//            case .success(let articles):
+//                self?.articles = articles
+//                DispatchQueue.main.async {
+//                    self?.topNewsTable.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 
 }
@@ -72,16 +90,17 @@ extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
         guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
-        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
+//        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
         let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
         cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
-                                                           description: descriptionNews,
+                                                           source: articles[indexPath.row].source.name,
+//                                                           description: descriptionNews,
                                                            imageUrl: imageNews))
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

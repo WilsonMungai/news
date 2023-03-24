@@ -50,7 +50,6 @@ extension TrendingApplesNewsViewController: UITableViewDelegate, UITableViewData
     // delegate function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
-        cell.backgroundColor = .blue
         return cell
     }
 }
