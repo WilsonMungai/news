@@ -10,10 +10,10 @@ import UIKit
 class TopNewsViewController: UIViewController {
     
     // object of article model
-//    private var articles: [Article] = [Article]()
+    private var articles: [Article] = [Article]()
     
     // dynamic title date
-//    let header = Date().formatted(.dateTime.month(.wide).day())
+    let header = Date().formatted(.dateTime.month(.wide).day())
     
     
     
@@ -28,18 +28,15 @@ class TopNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        title = "News, \(header)"
+        title = "News, \(header)"
     
         view.backgroundColor = .systemBackground
         
         view.addSubview(topNewsTable)
         
-//        topNewsTable.dataSource = self
-//        topNewsTable.delegate = self
+        tableSetup()
         
-//        fetchData()
-        
-        
+        fetchData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,6 +46,11 @@ class TopNewsViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func tableSetup() {
+        topNewsTable.dataSource = self
+        topNewsTable.delegate = self
     }
     
 //    private func fetchData() {
@@ -83,34 +85,46 @@ class TopNewsViewController: UIViewController {
 //            }
 //        }
 //    }
+    
+    private func fetchData() {
+        APICaller.shared.getTopCanadianNews { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                DispatchQueue.main.async {
+                    self?.topNewsTable.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 
 }
 
-//extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
-//    // data source function
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let count =  articles.count
-//        print("number of articles is \(count)")
-//        return count
-//    }
-//    // delegate function
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
-//        guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
-////        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
-//        let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
-//        cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
-//                                                           source: articles[indexPath.row].source.name,
-////                                                           description: descriptionNews,
-//                                                           imageUrl: imageNews))
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 150
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//}
+extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
+    // data source function
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
+    // delegate function
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
+        guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
+//        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
+        let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
+        cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
+                                                           source: articles[indexPath.row].source.name,
+//                                                           description: descriptionNews,
+                                                           imageUrl: imageNews))
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}

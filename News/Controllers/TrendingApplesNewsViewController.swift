@@ -54,7 +54,7 @@ class TrendingApplesNewsViewController: UIViewController {
         //            .year().day().month(.twoDigits))
         //        let date = Date().dayBefore.formatted()
         let date = Date().formatted()
-        APICaller.shared.getTopCanadianNews(with: date) { [weak self] result in
+        APICaller.shared.getLatestAppleNews(with: date) { [weak self] result in
             switch result {
             case .success(let articles):
                 self?.articles = articles
@@ -73,9 +73,7 @@ class TrendingApplesNewsViewController: UIViewController {
     extension TrendingApplesNewsViewController: UITableViewDelegate, UITableViewDataSource {
         // data source function
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            let count =  articles.count
-            print("number of articles is \(count)")
-            return count
+            return articles.count
         }
         // delegate function
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
