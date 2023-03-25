@@ -8,13 +8,7 @@
 import Foundation
 
 //https://newsapi.org/v2/top-headlines?country=ca&category=business&apiKey=2fa5011c5fad471290a59f5494197861
-//https://newsapi.org/v2/everything?q=apple&from=2023-02-25&to=2023-02-25&sortBy=popularity&apiKey=2fa5011c5fad471290a59f5494197861
 // https://newsapi.org/v2/everything?q=apple&from=2023/03/23&to=2023/03/23&sortBy=popularity&apiKey=2fa5011c5fad471290a59f5494197861
-// constants
-struct Constants {
-    static let APIKey = "2fa5011c5fad471290a59f5494197861"
-    static let baseUrl = "https://newsapi.org"
-}
 
 class APICaller {
     static let shared = APICaller()

@@ -12,6 +12,9 @@ class TopNewsTableViewCell: UITableViewCell {
     // identifier
     static let identifier = "TopNewsTableViewCell"
     
+    // apple logo
+    let appleLogo = UIImage(systemName: "apple.logo")
+    
     private let newsImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -99,7 +102,6 @@ class TopNewsTableViewCell: UITableViewCell {
         } else if let url = viewModel.imageUrl {
             URLSession.shared.dataTask(with: url) { [weak self] data, _ , error in
                 guard let data = data, error == nil else { return }
-//                self?.newsImage.image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self?.newsImage.image = UIImage(data: data)
                 }
