@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class TrendingApplesNewsViewController: UIViewController {
     
@@ -94,6 +95,10 @@ class TrendingApplesNewsViewController: UIViewController {
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
+            let article = articles[indexPath.row]
+            guard let articleUrl = URL(string: article.url ?? "") else { return }
+            let vc = SFSafariViewController(url:articleUrl)
+            present(vc, animated: true)
         }
     }
 

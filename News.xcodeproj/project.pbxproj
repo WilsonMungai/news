@@ -94,8 +94,8 @@
 			children = (
 				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
 				C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */,
-				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
 				C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */,
+				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
