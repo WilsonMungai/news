@@ -62,5 +62,23 @@ class APICaller {
         // resume task from suspended state
         task.resume()
     }
+    
+// https://newsapi.org/v2/everything?q=tesla&apiKey=2fa5011c5fad471290a59f5494197861
+    func search(with query: String, completion: @escaping (Result<[Article], Error>) -> Void ) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)/v2/everything?q=\(query)&apiKey=\(Constants.APIKey)") else {return}
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do {
+                let result = try JSONDecoder().decode(ArticleResponse.self, from: data)
+                completion(.success(result.articles))
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
 }
 

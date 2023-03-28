@@ -22,6 +22,7 @@
 		C81CD5B229AC046F00BF1572 /* TrendingApplesNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */; };
 		C85B454929CE54CB00912592 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454829CE54CB00912592 /* DateExtension.swift */; };
 		C85B454B29CE862A00912592 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454A29CE862A00912592 /* Route.swift */; };
+		C861623D29D23B5D00C04192 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C861623C29D23B5D00C04192 /* SearchResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingApplesNewsViewController.swift; sourceTree = "<group>"; };
 		C85B454829CE54CB00912592 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C85B454A29CE862A00912592 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		C861623C29D23B5D00C04192 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +94,8 @@
 		C81CD59E29A91DF200BF1572 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
-				C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */,
-				C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */,
-				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
+				C861623B29D23B2A00C04192 /* Others */,
+				C861623E29D23B8300C04192 /* Core */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -140,6 +140,25 @@
 				C85B454829CE54CB00912592 /* DateExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C861623B29D23B2A00C04192 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				C861623C29D23B5D00C04192 /* SearchResultViewController.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		C861623E29D23B8300C04192 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C81CD58E29A91BB600BF1572 /* NewsTabController.swift */,
+				C81CD59F29A91E0D00BF1572 /* TopNewsViewController.swift */,
+				C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */,
+				C81CD5A129A91E3700BF1572 /* SearchViewController.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +239,7 @@
 				C81CD5AD29AA751700BF1572 /* AppError.swift in Sources */,
 				C81CD58F29A91BB600BF1572 /* NewsTabController.swift in Sources */,
 				C85B454B29CE862A00912592 /* Route.swift in Sources */,
+				C861623D29D23B5D00C04192 /* SearchResultViewController.swift in Sources */,
 				C81CD5A529A92BDB00BF1572 /* TopNewsTableViewCell.swift in Sources */,
 				C81CD58B29A91BB600BF1572 /* AppDelegate.swift in Sources */,
 				C81CD58D29A91BB600BF1572 /* SceneDelegate.swift in Sources */,
