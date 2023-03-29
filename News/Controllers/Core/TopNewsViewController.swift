@@ -18,7 +18,7 @@ class TopNewsViewController: UIViewController {
     
     
     
-    // MARK: UI Elements
+    // MARK: - UI Elements
     // top news table
     private let topNewsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -26,6 +26,7 @@ class TopNewsViewController: UIViewController {
         return table
     }()
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,60 +40,27 @@ class TopNewsViewController: UIViewController {
         
         fetchData()
     }
-    
+    // table view frame
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         topNewsTable.frame = view.bounds
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+    // MARK: - Private methods
     private func tableSetup() {
         topNewsTable.dataSource = self
         topNewsTable.delegate = self
     }
     
-//    private func fetchData() {
-////        var date = DateFormatter()
-////        date.dateFormat = "yyyy-MM-dd"
-////        let date = Date().formatted(.iso8601)
-////        let date = Date().dayBefore.formatted(.dateTime
-////            .year().day().month(.twoDigits))
-////        let date = Date().dayBefore.formatted()
-//        let date = Date().formatted()
-//        APICaller.shared.getTopCanadianNews(with: date) { [weak self] result in
-//            switch result {
-//            case .success(let articles):
-//                self?.articles = articles
-//                DispatchQueue.main.async {
-//                    self?.topNewsTable.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-        
-//        APICaller.shared.getTopCanadianNews { [weak self] result in
-//            switch result {
-//            case .success(let articles):
-//                self?.articles = articles
-//                DispatchQueue.main.async {
-//                    self?.topNewsTable.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
+    // method that calls api to retreive data
     private func fetchData() {
         APICaller.shared.getTopCanadianNews { [weak self] result in
             switch result {
             case .success(let articles):
+                // hook up articles returned the array of articles
                 self?.articles = articles
                 DispatchQueue.main.async {
+                    // reload table view
                     self?.topNewsTable.reloadData()
                 }
             case .failure(let error):
@@ -100,37 +68,35 @@ class TopNewsViewController: UIViewController {
             }
         }
     }
-
 }
-
+// MARK: - Table view extension
 extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
-    // data source function
+    // number of articles returned
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
-    // delegate function
+    // data to be displayed in cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
         guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
-//        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
         let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
         cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
                                                            source: articles[indexPath.row].source.name,
-//                                                           description: descriptionNews,
                                                            imageUrl: imageNews))
         return cell
     }
-
+    
+    // row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
 
+    // navigate to safari browser
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let url = articles[indexPath.row]
         guard let articleUrl = URL(string: url.url ?? "") else {return}
         let vc = SFSafariViewController(url: articleUrl)
         present(vc, animated: true)
-                
     }
 }

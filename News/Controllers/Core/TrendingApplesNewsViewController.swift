@@ -36,17 +36,20 @@ class TrendingApplesNewsViewController: UIViewController {
         fetchData()
         
     }
-    
+    // table view frame
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         appleNewsTable.frame = view.bounds
     }
     
+    // MARK: - Private methods
+    // setup table
     private func setupTable() {
         appleNewsTable.delegate = self
         appleNewsTable.dataSource = self
     }
     
+    // method that calls api to retreive data
     private func fetchData() {
         //        var date = DateFormatter()
         //        date.dateFormat = "yyyy-MM-dd"
@@ -58,6 +61,7 @@ class TrendingApplesNewsViewController: UIViewController {
         APICaller.shared.getLatestAppleNews(with: date) { [weak self] result in
             switch result {
             case .success(let articles):
+                // hook up articles returned the array of articles
                 self?.articles = articles
                 DispatchQueue.main.async {
                     self?.appleNewsTable.reloadData()
@@ -70,29 +74,28 @@ class TrendingApplesNewsViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+ // MARK: - Table view extension
     extension TrendingApplesNewsViewController: UITableViewDelegate, UITableViewDataSource {
-        // data source function
+        // number of articles returned
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return articles.count
         }
-        // delegate function
+        // data to be displayed in cell
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
             guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
-    //        guard let descriptionNews = articles[indexPath.row].description else { return  UITableViewCell()}
-            let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
+            let placeholder = URL(string: "https://www.flaticon.com/free-icon/newspaper_3208799")
+            let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "\(String(describing: placeholder))")
             cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
                                                                source: articles[indexPath.row].source.name,
-    //                                                           description: descriptionNews,
                                                                imageUrl: imageNews))
             return cell
         }
-        
+        // row height
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 150
         }
-        
+        // navigate to safari browser
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
             let article = articles[indexPath.row]
