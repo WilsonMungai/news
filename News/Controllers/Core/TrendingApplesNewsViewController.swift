@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 import SafariServices
 
 class TrendingApplesNewsViewController: UIViewController {
@@ -27,14 +28,13 @@ class TrendingApplesNewsViewController: UIViewController {
         
         view.addSubview(appleNewsTable)
         
-        title = "Apple News"
-        
         view.backgroundColor = .systemBackground
         
         setupTable()
         
-        fetchData()
+        ProgressHUD.show()
         
+        fetchData()
     }
     // table view frame
     override func viewDidLayoutSubviews() {
@@ -47,26 +47,24 @@ class TrendingApplesNewsViewController: UIViewController {
     private func setupTable() {
         appleNewsTable.delegate = self
         appleNewsTable.dataSource = self
+        title = "Apple News"
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "title") ??  ""]
     }
     
     // method that calls api to retreive data
     private func fetchData() {
-        //        var date = DateFormatter()
-        //        date.dateFormat = "yyyy-MM-dd"
-        //        let date = Date().formatted(.iso8601)
-        //        let date = Date().dayBefore.formatted(.dateTime
-        //            .year().day().month(.twoDigits))
-        //        let date = Date().dayBefore.formatted()
         let date = Date().formatted()
         APICaller.shared.getLatestAppleNews(with: date) { [weak self] result in
             switch result {
             case .success(let articles):
                 // hook up articles returned the array of articles
                 self?.articles = articles
+                ProgressHUD.dismiss()
                 DispatchQueue.main.async {
                     self?.appleNewsTable.reloadData()
                 }
             case .failure(let error):
+                ProgressHUD.show()
                 print(error.localizedDescription)
             }
         }
@@ -84,8 +82,7 @@ class TrendingApplesNewsViewController: UIViewController {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
             guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
-            let placeholder = URL(string: "https://www.flaticon.com/free-icon/newspaper_3208799")
-            let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "\(String(describing: placeholder))")
+            let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
             cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
                                                                source: articles[indexPath.row].source.name,
                                                                imageUrl: imageNews))
@@ -98,9 +95,12 @@ class TrendingApplesNewsViewController: UIViewController {
         // navigate to safari browser
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
-            let article = articles[indexPath.row]
-            guard let articleUrl = URL(string: article.url ?? "") else { return }
-            let vc = SFSafariViewController(url:articleUrl)
+            // get article url
+            guard let article = articles[indexPath.row].url else { return }
+            // url string
+            guard let articleUrl = URL(string: article) else { return }
+            // open safari browser
+            let vc = SFSafariViewController(url: articleUrl)
             present(vc, animated: true)
         }
     }

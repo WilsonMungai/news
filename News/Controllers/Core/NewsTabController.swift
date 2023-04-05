@@ -23,6 +23,7 @@ class NewsTabController: UITabBarController {
         let appleNewsVC = TrendingApplesNewsViewController()
         let searchVC = SearchViewController()
         
+        
         // Set large titles
         topNewsVC.navigationItem.largeTitleDisplayMode = .automatic
         appleNewsVC.navigationItem.largeTitleDisplayMode = .automatic
@@ -56,7 +57,7 @@ class NewsTabController: UITabBarController {
         setViewControllers([topNewsNav, appleNewsNav, searchNewsNav], animated: true)
         
         // change tint color
-        tabBar.tintColor = .label
+//        tabBar.tintColor = .label
     }
 
 

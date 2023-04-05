@@ -21,8 +21,9 @@
 		C81CD5B029AAAF9800BF1572 /* TopNewsViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5AF29AAAF9800BF1572 /* TopNewsViewCellViewModel.swift */; };
 		C81CD5B229AC046F00BF1572 /* TrendingApplesNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */; };
 		C85B454929CE54CB00912592 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454829CE54CB00912592 /* DateExtension.swift */; };
-		C85B454B29CE862A00912592 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454A29CE862A00912592 /* Route.swift */; };
-		C861623D29D23B5D00C04192 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C861623C29D23B5D00C04192 /* SearchResultViewController.swift */; };
+		C85B454B29CE862A00912592 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454A29CE862A00912592 /* Constants.swift */; };
+		C861626E29D4DFDD00C04192 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = C861626D29D4DFDD00C04192 /* ProgressHUD */; };
+		C8C0353429DB2B8300ECEA26 /* Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C0353329DB2B8300ECEA26 /* Featured.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +43,8 @@
 		C81CD5AF29AAAF9800BF1572 /* TopNewsViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsViewCellViewModel.swift; sourceTree = "<group>"; };
 		C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingApplesNewsViewController.swift; sourceTree = "<group>"; };
 		C85B454829CE54CB00912592 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		C85B454A29CE862A00912592 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		C861623C29D23B5D00C04192 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		C85B454A29CE862A00912592 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C8C0353329DB2B8300ECEA26 /* Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C861626E29D4DFDD00C04192 /* ProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,15 +78,14 @@
 		C81CD58929A91BB600BF1572 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				C83750E429D7BB0900EE8671 /* App */,
+				C83750E329D7BAEB00EE8671 /* Resources */,
 				C85B454729CE54B100912592 /* Extension */,
 				C81CD5A929AA729A00BF1572 /* Network */,
-				C81CD5AE29AAAF6400BF1572 /* ViewModel */,
 				C81CD5A629AA725F00BF1572 /* Model */,
+				C81CD5AE29AAAF6400BF1572 /* ViewModel */,
 				C81CD5A329A92BAA00BF1572 /* Views */,
 				C81CD59E29A91DF200BF1572 /* Controllers */,
-				C81CD58A29A91BB600BF1572 /* AppDelegate.swift */,
-				C81CD58C29A91BB600BF1572 /* SceneDelegate.swift */,
-				C81CD59329A91BB800BF1572 /* Assets.xcassets */,
 				C81CD59529A91BB800BF1572 /* LaunchScreen.storyboard */,
 				C81CD59829A91BB800BF1572 /* Info.plist */,
 			);
@@ -94,7 +95,6 @@
 		C81CD59E29A91DF200BF1572 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C861623B29D23B2A00C04192 /* Others */,
 				C861623E29D23B8300C04192 /* Core */,
 			);
 			path = Controllers;
@@ -112,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				C81CD5A729AA727800BF1572 /* Articles.swift */,
+				C8C0353329DB2B8300ECEA26 /* Featured.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,7 +122,7 @@
 			children = (
 				C81CD5AA29AA72B900BF1572 /* APICaller.swift */,
 				C81CD5AC29AA751700BF1572 /* AppError.swift */,
-				C85B454A29CE862A00912592 /* Route.swift */,
+				C85B454A29CE862A00912592 /* Constants.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -134,20 +135,29 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C83750E329D7BAEB00EE8671 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C81CD59329A91BB800BF1572 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C83750E429D7BB0900EE8671 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C81CD58A29A91BB600BF1572 /* AppDelegate.swift */,
+				C81CD58C29A91BB600BF1572 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		C85B454729CE54B100912592 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				C85B454829CE54CB00912592 /* DateExtension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		C861623B29D23B2A00C04192 /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				C861623C29D23B5D00C04192 /* SearchResultViewController.swift */,
-			);
-			path = Others;
 			sourceTree = "<group>";
 		};
 		C861623E29D23B8300C04192 /* Core */ = {
@@ -177,6 +187,9 @@
 			dependencies = (
 			);
 			name = News;
+			packageProductDependencies = (
+				C861626D29D4DFDD00C04192 /* ProgressHUD */,
+			);
 			productName = News;
 			productReference = C81CD58729A91BB600BF1572 /* News.app */;
 			productType = "com.apple.product-type.application";
@@ -205,6 +218,9 @@
 				Base,
 			);
 			mainGroup = C81CD57E29A91BB600BF1572;
+			packageReferences = (
+				C861626C29D4DFDD00C04192 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+			);
 			productRefGroup = C81CD58829A91BB600BF1572 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -238,8 +254,8 @@
 				C81CD5A229A91E3700BF1572 /* SearchViewController.swift in Sources */,
 				C81CD5AD29AA751700BF1572 /* AppError.swift in Sources */,
 				C81CD58F29A91BB600BF1572 /* NewsTabController.swift in Sources */,
-				C85B454B29CE862A00912592 /* Route.swift in Sources */,
-				C861623D29D23B5D00C04192 /* SearchResultViewController.swift in Sources */,
+				C85B454B29CE862A00912592 /* Constants.swift in Sources */,
+				C8C0353429DB2B8300ECEA26 /* Featured.swift in Sources */,
 				C81CD5A529A92BDB00BF1572 /* TopNewsTableViewCell.swift in Sources */,
 				C81CD58B29A91BB600BF1572 /* AppDelegate.swift in Sources */,
 				C81CD58D29A91BB600BF1572 /* SceneDelegate.swift in Sources */,
@@ -454,6 +470,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C861626C29D4DFDD00C04192 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C861626D29D4DFDD00C04192 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C861626C29D4DFDD00C04192 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C81CD57F29A91BB600BF1572 /* Project object */;
 }

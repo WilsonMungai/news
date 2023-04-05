@@ -8,6 +8,7 @@
 import UIKit
 import SafariServices
 
+// responsible for search view controller
 class SearchViewController: UIViewController {
     
     private var articles: [Article] = [Article]()
@@ -27,7 +28,7 @@ class SearchViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
+        
         view.backgroundColor = .systemBackground
         
         view.addSubview(searchTable)
@@ -45,6 +46,8 @@ class SearchViewController: UIViewController {
     private func setupTable() {
         searchTable.delegate = self
         searchTable.dataSource = self
+        title = "Search"
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "title") ??  ""]
     }
     // setup search view controller
     private func createSearchViewController() {
@@ -81,8 +84,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     // navigate to safari browser
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        // get article url
         guard let article = articles[indexPath.row].url else { return }
+        // url string
         guard let articleUrl = URL(string: article) else { return }
+        // open safari browser
         let vc = SFSafariViewController(url: articleUrl)
         present(vc, animated: true)
     }
@@ -91,8 +97,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
     // notify delegate search button was clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // search query
         guard let query = searchBar.text, !query.isEmpty else { return }
-        print(query)
+        // api caller with user query
         APICaller.shared.search(with: query) { [weak self] result in
             switch result {
             case .success(let article):

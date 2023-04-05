@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import ProgressHUD
 import SafariServices
 
 class TopNewsViewController: UIViewController {
-    
+    static let identifier = "TopNewsViewController"
     // object of article model
     private var articles: [Article] = [Article]()
     
@@ -29,8 +30,6 @@ class TopNewsViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "News, \(header)"
     
         view.backgroundColor = .systemBackground
         
@@ -38,7 +37,10 @@ class TopNewsViewController: UIViewController {
         
         tableSetup()
         
+        ProgressHUD.show()
+        
         fetchData()
+        
     }
     // table view frame
     override func viewDidLayoutSubviews() {
@@ -50,6 +52,8 @@ class TopNewsViewController: UIViewController {
     private func tableSetup() {
         topNewsTable.dataSource = self
         topNewsTable.delegate = self
+        title = "News, \(header)"
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "title") ??  ""]
     }
     
     // method that calls api to retreive data
@@ -59,11 +63,13 @@ class TopNewsViewController: UIViewController {
             case .success(let articles):
                 // hook up articles returned the array of articles
                 self?.articles = articles
+                ProgressHUD.dismiss()
                 DispatchQueue.main.async {
                     // reload table view
                     self?.topNewsTable.reloadData()
                 }
             case .failure(let error):
+                ProgressHUD.show()
                 print(error)
             }
         }
@@ -95,7 +101,9 @@ extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let url = articles[indexPath.row]
+        // get article url
         guard let articleUrl = URL(string: url.url ?? "") else {return}
+        // show the safari browser with the article url
         let vc = SFSafariViewController(url: articleUrl)
         present(vc, animated: true)
     }
