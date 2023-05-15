@@ -70,10 +70,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let article = articles[indexPath.row]
         let title = article.title ?? ""
         let source = article.source.name
+        guard let publishedAt = articles[indexPath.row].publishedAt else { return UITableViewCell() }
         let image = URL(string: article.urlToImage ?? "")
         cell.configure(viewModel: TopNewsViewCellViewModel(title: title,
                                                            source: source,
-                                                           imageUrl: image))
+                                                           imageUrl: image,
+                                                           date: publishedAt))
         cell.selectionStyle = .none
         return cell
     }

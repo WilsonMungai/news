@@ -43,9 +43,19 @@ class TopNewsTableViewCell: UITableViewCell {
         return label
     }()
     
-    // Loading spinner
-    private let spinner: UIActivityIndicatorView =
-    {
+    private let postTime: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "28m ago"
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont(name:"Arial Rounded MT Bold", size: 15)
+        label.textColor = UIColor(named: "title")
+        return label
+    }()
+    
+    // spinner
+    private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.hidesWhenStopped = true
         spinner.translatesAutoresizingMaskIntoConstraints = false
@@ -56,10 +66,11 @@ class TopNewsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .systemBackground
-        contentView.addSubview(newsImage)
-        contentView.addSubview(newsTitle)
-        contentView.addSubview(newsSource)
-        contentView.addSubview(spinner)
+        contentView.addSubviews(newsImage,
+                                newsTitle,
+                                newsSource,
+                                spinner,
+                                postTime)
         spinner.startAnimating()
         addConstraint()
     }
@@ -87,10 +98,16 @@ class TopNewsTableViewCell: UITableViewCell {
             // news title
             newsTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            
             // news source
             newsSource.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -170),
             newsSource.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             newsSource.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            // post time
+            postTime.centerYAnchor.constraint(equalTo: newsSource.centerYAnchor),
+            postTime.trailingAnchor.constraint(equalTo: newsTitle.trailingAnchor),
+            
             // news image constraints
             newsImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             newsImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -105,9 +122,6 @@ class TopNewsTableViewCell: UITableViewCell {
             spinner.leadingAnchor.constraint(equalTo: newsTitle.trailingAnchor, constant: 20),
             spinner.heightAnchor.constraint(equalToConstant: 100),
             spinner.widthAnchor.constraint(equalToConstant: 100),
-            
-//            spinner.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
         ])
     }
     
@@ -115,8 +129,11 @@ class TopNewsTableViewCell: UITableViewCell {
     public func configure(viewModel: TopNewsViewCellViewModel) {
         // news title hookup with view model
         newsTitle.text = viewModel.title
+        // news source
         newsSource.text = viewModel.source
-        // make usre that we have data
+        // post time
+        postTime.text = viewModel.dateFromString
+        // make sure that we have data
         if let data = viewModel.imageData {
             // if there are images stored in cache, fetch the images from cache instead of downloading again
             newsImage.image = UIImage(data: data)

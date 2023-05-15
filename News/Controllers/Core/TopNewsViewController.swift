@@ -10,14 +10,14 @@ import ProgressHUD
 import SafariServices
 
 class TopNewsViewController: UIViewController {
+    
     static let identifier = "TopNewsViewController"
+    
     // object of article model
     private var articles: [Article] = [Article]()
     
     // dynamic title date
     let header = Date().formatted(.dateTime.month(.wide).day())
-    
-    
     
     // MARK: - UI Elements
     // top news table
@@ -74,6 +74,8 @@ class TopNewsViewController: UIViewController {
             }
         }
     }
+    
+   
 }
 // MARK: - Table view extension
 extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -85,10 +87,12 @@ extension TopNewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
         guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
+        guard let publishedAt = articles[indexPath.row].publishedAt else { return UITableViewCell() }
         let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
         cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
                                                            source: articles[indexPath.row].source.name,
-                                                           imageUrl: imageNews))
+                                                           imageUrl: imageNews,
+                                                           date: publishedAt))
         return cell
     }
     

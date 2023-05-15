@@ -9,8 +9,6 @@ import Foundation
 
 // MARK: - Article Response
 struct ArticleResponse: Codable {
-//    let status: String
-//    let totalResults: Int
     let articles: [Article]
 }
 

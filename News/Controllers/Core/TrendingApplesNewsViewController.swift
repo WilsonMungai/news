@@ -82,10 +82,12 @@ class TrendingApplesNewsViewController: UIViewController {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TopNewsTableViewCell.identifier, for: indexPath) as? TopNewsTableViewCell else { return UITableViewCell()}
             guard let titleNews = articles[indexPath.row].title else { return UITableViewCell() }
+            guard let publishedAt = articles[indexPath.row].publishedAt else { return UITableViewCell() }
             let imageNews = URL(string: articles[indexPath.row].urlToImage ?? "")
             cell.configure(viewModel: TopNewsViewCellViewModel(title: titleNews,
                                                                source: articles[indexPath.row].source.name,
-                                                               imageUrl: imageNews))
+                                                               imageUrl: imageNews,
+                                                               date: publishedAt))
             return cell
         }
         // row height

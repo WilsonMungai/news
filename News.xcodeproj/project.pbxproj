@@ -23,6 +23,7 @@
 		C85B454929CE54CB00912592 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454829CE54CB00912592 /* DateExtension.swift */; };
 		C85B454B29CE862A00912592 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B454A29CE862A00912592 /* Constants.swift */; };
 		C861626E29D4DFDD00C04192 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = C861626D29D4DFDD00C04192 /* ProgressHUD */; };
+		C87D889329ECBEB800F65DFC /* AddViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87D889229ECBEB800F65DFC /* AddViewExtension.swift */; };
 		C8C0353429DB2B8300ECEA26 /* Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C0353329DB2B8300ECEA26 /* Featured.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		C81CD5B129AC046F00BF1572 /* TrendingApplesNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingApplesNewsViewController.swift; sourceTree = "<group>"; };
 		C85B454829CE54CB00912592 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C85B454A29CE862A00912592 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C87D889229ECBEB800F65DFC /* AddViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewExtension.swift; sourceTree = "<group>"; };
 		C8C0353329DB2B8300ECEA26 /* Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				C85B454829CE54CB00912592 /* DateExtension.swift */,
+				C87D889229ECBEB800F65DFC /* AddViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			files = (
 				C81CD5B029AAAF9800BF1572 /* TopNewsViewCellViewModel.swift in Sources */,
 				C85B454929CE54CB00912592 /* DateExtension.swift in Sources */,
+				C87D889329ECBEB800F65DFC /* AddViewExtension.swift in Sources */,
 				C81CD5B229AC046F00BF1572 /* TrendingApplesNewsViewController.swift in Sources */,
 				C81CD5A829AA727800BF1572 /* Articles.swift in Sources */,
 				C81CD5A229A91E3700BF1572 /* SearchViewController.swift in Sources */,

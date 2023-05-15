@@ -40,10 +40,8 @@ class APICaller {
         let task = URLSession.shared.dataTask(with: url) { data, _ , error in
             guard let data = data, error == nil else { return }
             do {
-//                let result  = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                 let result = try JSONDecoder().decode(ArticleResponse.self, from: data)
                 completion(.success(result.articles))
-//                print(result)
             } catch {
                 completion(.failure(AppError.failedToGetData))
             }
