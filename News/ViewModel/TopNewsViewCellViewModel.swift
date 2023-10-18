@@ -30,7 +30,6 @@ class TopNewsViewCellViewModel {
         dateFormatter.timeZone = .current
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
-//        return "\(dateFormatter.date(from: date) ?? Date())"
         return "\(dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .shortened) ?? "")"
     }
 }
